@@ -10,12 +10,13 @@
     </parent>
 
     <modules>
-        <module>books-service</module>
-        <module>users-service</module>
+        <module>library-api-books-service</module>
+        <module>library-api-users-service</module>
+        <module>library-api-authentication-server</module>
     </modules>
 
     <groupId>dev.earlspilner</groupId>
-    <artifactId>libarary-api</artifactId>
+    <artifactId>library-api</artifactId>
     <version>1.1.0</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
