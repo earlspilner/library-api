@@ -13,4 +13,6 @@ public interface UserService {
     Page<User> getUsers(Pageable pageable);
     User updateUser(Integer id, User user);
     void deleteUser(Integer id);
+
+    User getUserByUsername(String username);
 }

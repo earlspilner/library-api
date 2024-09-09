@@ -27,6 +27,10 @@ public class User {
     private String name;
 
     @Setter
+    @Column(name = "username", unique = true, nullable = false)
+    private String username;
+
+    @Setter
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
@@ -62,10 +66,11 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String name, String email, String password,
-                Instant createdUtc, Instant updatedUtc, List<UserRole> roles) {
+    public User(Integer id, String name, String username, String email,
+                String password, Instant createdUtc, Instant updatedUtc, List<UserRole> roles) {
         this.id = id;
         this.name = name;
+        this.username = username;
         this.email = email;
         this.password = password;
         this.createdUtc = createdUtc;
@@ -78,6 +83,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", createdUtc=" + createdUtc +

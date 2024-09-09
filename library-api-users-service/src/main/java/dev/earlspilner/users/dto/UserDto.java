@@ -16,6 +16,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 public record UserDto(
         Integer id,
         @NotNull String name,
+        @NotNull String username,
         @Email @NotNull String email,
         @NotNull String password,
         String createdUtc,

@@ -64,4 +64,11 @@ public class UserRestController implements UsersApi {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @Override
+    @GetMapping("/feign/{username}")
+    public ResponseEntity<UserDto> getUserByUsername(@PathVariable String username) {
+        User user = userService.getUserByUsername(username);
+        return new ResponseEntity<>(userMapper.toDto(user), HttpStatus.OK);
+    }
+
 }

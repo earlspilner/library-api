@@ -16,4 +16,6 @@ public interface UsersApi {
     ResponseEntity<UserDto> updateUser(Integer id, UserDto userDto);
     ResponseEntity<Void> deleteUser(Integer id);
 
+    ResponseEntity<UserDto> getUserByUsername(String username);
+
 }
