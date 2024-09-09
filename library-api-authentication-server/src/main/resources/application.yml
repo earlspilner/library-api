@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: authentication-server
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888/}
+
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+
+server:
+  port: 6969
+  servlet:
+    context-path: /api/
+
+logging:
+  level:
+    org.springframework.web: info
+    dev.earlspilner.auth: info

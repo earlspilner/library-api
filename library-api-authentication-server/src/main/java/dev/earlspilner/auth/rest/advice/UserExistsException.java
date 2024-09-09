@@ -1,4 +1,4 @@
-package dev.earlspilner.users.rest.advice;
+package dev.earlspilner.auth.rest.advice;
 
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -6,7 +6,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @ResponseStatus(BAD_REQUEST)
 public class UserExistsException extends RuntimeException {
-    public UserExistsException(String email) {
-        super("User already exists with email: " + email);
+    public UserExistsException(String username) {
+        super("User already exists with username: " + username);
     }
 }
