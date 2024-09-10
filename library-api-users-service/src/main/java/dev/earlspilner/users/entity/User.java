@@ -9,12 +9,13 @@ import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
 
-import static dev.earlspilner.users.security.UserRole.ROLE_USER;
+import static dev.earlspilner.users.security.UserRole.ROLE_VISITOR;
 
 /**
  * @author Alexander Dudkin
  */
-@Entity @Getter
+@Entity
+@Getter
 @Table(name = "users")
 public class User {
 
@@ -51,7 +52,7 @@ public class User {
     @CollectionTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"))
-    private List<UserRole> roles = Collections.singletonList(ROLE_USER);
+    private List<UserRole> roles = Collections.singletonList(ROLE_VISITOR);
 
     @PrePersist
     protected void onCreate() {

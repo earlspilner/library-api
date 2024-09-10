@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @FeignClient(
         value = "users-service",
-        url = "http://localhost:9091/api/users/feign",
+        url = "http://localhost:9091/api/users/",
         configuration = FeignConfig.class
 )
 public interface UserServiceClient {

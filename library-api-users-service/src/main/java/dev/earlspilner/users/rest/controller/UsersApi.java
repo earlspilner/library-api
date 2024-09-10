@@ -9,13 +9,9 @@ import org.springframework.http.ResponseEntity;
  * @author Alexander Dudkin
  */
 public interface UsersApi {
-
     ResponseEntity<UserDto> addUser(UserDto userDto);
-    ResponseEntity<UserDto> getUser(Integer id);
+    ResponseEntity<UserDto> getUser(String username);
     ResponseEntity<Page<UserDto>> getUsers(Pageable pageable);
-    ResponseEntity<UserDto> updateUser(Integer id, UserDto userDto);
+    ResponseEntity<UserDto> updateUser(String username, UserDto userDto);
     ResponseEntity<Void> deleteUser(Integer id);
-
-    ResponseEntity<UserDto> getUserByUsername(String username);
-
 }

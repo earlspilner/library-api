@@ -1,6 +1,6 @@
 package dev.earlspilner.users.service;
 
-import dev.earlspilner.users.entity.User;
+import dev.earlspilner.users.dto.UserDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -8,11 +8,9 @@ import org.springframework.data.domain.Pageable;
  * @author Alexander Dudkin
  */
 public interface UserService {
-    void saveUser(User user);
-    User getUser(Integer id);
-    Page<User> getUsers(Pageable pageable);
-    User updateUser(Integer id, User user);
+    UserDto saveUser(UserDto dto);
+    UserDto getUser(String username);
+    Page<UserDto> getUsers(Pageable pageable);
+    UserDto updateUser(String username, UserDto dto);
     void deleteUser(Integer id);
-
-    User getUserByUsername(String username);
 }
