@@ -12,6 +12,7 @@
     <modules>
         <module>library-api-users-service</module>
         <module>library-api-authentication-server</module>
+        <module>library-api-books-service</module>
     </modules>
 
     <groupId>dev.earlspilner</groupId>
