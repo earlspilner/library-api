@@ -22,7 +22,6 @@
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
 
-
     <properties>
         <java.version>21</java.version>
 
