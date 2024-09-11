@@ -18,5 +18,5 @@ server:
 
 logging:
   level:
-    org.springframework.web: info
-    dev.earlspilner.books: info
+    org.springframework.web: debug
+    dev.earlspilner.books: debug

@@ -1,4 +1,4 @@
-package dev.earlspilner.loan.security;
+package dev.earlspilner.library.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +21,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(req -> req
-                        .anyRequest().permitAll())
+                .authorizeHttpRequests(req -> req.anyRequest().permitAll())
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS));
         return http.build();
     }

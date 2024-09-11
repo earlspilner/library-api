@@ -16,5 +16,5 @@ server:
 
 logging:
   level:
-    org.springframework.web: info
-    dev.earlspilner.auth: info
+    org.springframework.web: debug
+    dev.earlspilner.auth: debug
