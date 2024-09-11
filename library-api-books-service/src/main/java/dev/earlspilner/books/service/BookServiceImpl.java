@@ -1,6 +1,9 @@
 package dev.earlspilner.books.service;
 
+import dev.earlspilner.books.config.LibraryClient;
 import dev.earlspilner.books.dto.BookDto;
+import dev.earlspilner.books.dto.BookRecordDto;
+import dev.earlspilner.books.dto.BookStatus;
 import dev.earlspilner.books.entity.Book;
 import dev.earlspilner.books.mapper.BookMapper;
 import dev.earlspilner.books.repository.BookRepository;
@@ -12,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static dev.earlspilner.books.dto.BookStatus.IN_LIBRARY;
+
 /**
  * @author Alexander Dudkin
  */
@@ -19,11 +24,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class BookServiceImpl implements BookService {
 
     private final BookMapper bookMapper;
+    private final LibraryClient libraryClient;
     private final BookRepository bookRepository;
 
     @Autowired
-    public BookServiceImpl(BookMapper bookMapper, BookRepository bookRepository) {
+    public BookServiceImpl(BookMapper bookMapper, LibraryClient libraryClient, BookRepository bookRepository) {
         this.bookMapper = bookMapper;
+        this.libraryClient = libraryClient;
         this.bookRepository = bookRepository;
     }
 
@@ -33,8 +40,8 @@ public class BookServiceImpl implements BookService {
         if (bookRepository.existsByIsbn(bookDto.isbn()))
             throw new BookExistsException("Book already exists with ISBN: " + bookDto.isbn());
 
-        Book book = bookMapper.toBookEntity(bookDto);
-        bookRepository.save(book);
+        Book book = bookRepository.save(bookMapper.toBookEntity(bookDto));
+        libraryClient.addBookRecord(new BookRecordDto(book.getId(), IN_LIBRARY));
         return bookMapper.toBookDto(book);
     }
 
