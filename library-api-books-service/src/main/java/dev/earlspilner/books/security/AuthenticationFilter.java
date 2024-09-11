@@ -74,7 +74,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         String userAgent = request.getHeader("User-Agent");
         String requestURI = request.getRequestURI();
 
-        return (userAgent != null && userAgent.contains("Feign")) || requestURI.equals("/api/users") && "POST".equalsIgnoreCase(request.getMethod());
+        return (userAgent != null && userAgent.contains("Feign")) || request.getServerPort() == 9092;
     }
 
 }
