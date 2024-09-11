@@ -37,4 +37,9 @@ public class LibraryServiceImpl implements LibraryService {
     public BookRecordDto updateBookRecord(Integer bookId, BookRecordDto dto) {
         return null;
     }
+
+    @Override
+    public void deleteBookRecord(Integer id) {
+        bookRecordRepository.deleteById(id);
+    }
 }
