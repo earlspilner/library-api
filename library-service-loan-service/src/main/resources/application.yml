@@ -2,7 +2,7 @@ spring:
   profiles:
     active: postgresql
   application:
-    name: library-service
+    name: loan-service
   config:
     import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888/}
 
@@ -12,7 +12,7 @@ eureka:
     register-with-eureka: false
 
 server:
-  port: 9094
+  port: 9093
   servlet:
     context-path: /api/
 
