@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    active: postgresql
+  application:
+    name: loans-service
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888/}
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+
+server:
+  port: 9093
+  servlet:
+    context-path: /api/
+
+logging:
+  level:
+    org.springframework.web: debug
+    dev.earlspilner.books: debug

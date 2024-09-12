@@ -15,6 +15,7 @@
         <module>library-api-books-service</module>
         <module>library-api-library-service</module>
         <module>library-api-discovery-server</module>
+        <module>library-api-loan-service</module>
     </modules>
 
     <groupId>dev.earlspilner</groupId>

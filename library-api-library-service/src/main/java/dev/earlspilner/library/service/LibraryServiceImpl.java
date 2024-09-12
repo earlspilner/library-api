@@ -30,9 +30,9 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
-    public BookRecordDto getBookRecord(Integer id) {
-        BookRecord bookRecord = bookRecordRepository.findById(id)
-                .orElseThrow(() -> new BookRecordNotFoundException("Book not found with ID: " + id));
+    public BookRecordDto getBookRecord(Integer bookId) {
+        BookRecord bookRecord = bookRecordRepository.findByBookId(bookId)
+                .orElseThrow(() -> new BookRecordNotFoundException("Book not found with ID: " + bookId));
         return bookRecordMapper.toDto(bookRecord);
     }
 

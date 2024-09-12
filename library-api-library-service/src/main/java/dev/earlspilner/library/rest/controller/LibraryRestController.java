@@ -34,7 +34,7 @@ public class LibraryRestController implements LibraryApi {
     }
 
     @Override
-    @PatchMapping("/{bookId}")
+    @PutMapping("/{bookId}")
     public ResponseEntity<BookRecordDto> updateBookRecord(@PathVariable Integer bookId,
                                                           @RequestBody BookRecordDto dto) {
         return new ResponseEntity<>(libraryService.updateBookRecord(bookId, dto), HttpStatus.OK);
