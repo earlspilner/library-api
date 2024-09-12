@@ -40,4 +40,11 @@ public class LibraryRestController implements LibraryApi {
         return new ResponseEntity<>(libraryService.updateBookRecord(bookId, dto), HttpStatus.OK);
     }
 
+    @Override
+    @DeleteMapping("/{bookId}")
+    public ResponseEntity<Void> deleteBookRecord(@PathVariable Integer bookId) {
+        libraryService.deleteBookRecord(bookId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }

@@ -49,4 +49,9 @@ public class LibraryServiceImpl implements LibraryService {
         return bookRecordMapper.toDto(bookRecordRepository.save(bookRecord));
     }
 
+    @Override
+    public void deleteBookRecord(Integer bookId) {
+        bookRecordRepository.deleteById(bookId);
+    }
+
 }

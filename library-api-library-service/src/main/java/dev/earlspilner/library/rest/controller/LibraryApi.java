@@ -10,4 +10,5 @@ public interface LibraryApi {
     ResponseEntity<BookRecordDto> addBootRecord(BookRecordDto dto);
     ResponseEntity<BookRecordDto> getBookRecord(Integer bookId);
     ResponseEntity<BookRecordDto> updateBookRecord(Integer bookId, BookRecordDto dto);
+    ResponseEntity<Void> deleteBookRecord(Integer bookId);
 }

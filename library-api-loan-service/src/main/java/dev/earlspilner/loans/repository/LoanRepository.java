@@ -9,5 +9,5 @@ import java.util.Optional;
  * @author Alexander Dudkin
  */
 public interface LoanRepository extends JpaRepository<Loan, Integer> {
-    Optional<Loan> findByUserIdAndBookIdAndReturnedAtIsNull(Integer bookId, Integer userId);
+    Optional<Loan> findByBookIdAndUserIdAndReturnedAtIsNull(Integer bookId, Integer userId);
 }

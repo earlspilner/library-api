@@ -70,7 +70,7 @@ public class LoanServiceImpl implements LoanService {
         }
 
         UserDto userDto = userClient.getUser(jwtCore.getUsernameFromToken(jwtCore.getTokenFromRequest(request)));
-        Loan loan = loanRepository.findByUserIdAndBookIdAndReturnedAtIsNull(bookId, userDto.id())
+        Loan loan = loanRepository.findByBookIdAndUserIdAndReturnedAtIsNull(bookId, userDto.id())
                 .orElseThrow(() -> new LoanNotFoundException("Loan not found with bookId '" + bookId + "' and userId '" + userDto.id() + "'"));
         loan.setReturnedAt(Instant.now());
         libraryClient.setBookStatus(bookId, new BookRecordDto(null, IN_LIBRARY));

@@ -39,10 +39,6 @@ public class Book {
     private String author;
 
     @Setter
-    @Column(name = "available", nullable = false)
-    private Boolean available = true;
-
-    @Setter
     @Column(name = "appearedUtc", nullable = false, updatable = false)
     private Instant appearedUtc;
 
@@ -54,14 +50,13 @@ public class Book {
     public Book() {
     }
 
-    public Book(Integer id, String isbn, String title, String genre, String description, String author, Boolean available, Instant appearedUtc) {
+    public Book(Integer id, String isbn, String title, String genre, String description, String author, Instant appearedUtc) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
         this.genre = genre;
         this.description = description;
         this.author = author;
-        this.available = available;
         this.appearedUtc = appearedUtc;
     }
 
@@ -74,7 +69,6 @@ public class Book {
                 .append("genre", genre)
                 .append("description", description)
                 .append("author", author)
-                .append("available", available)
                 .append("appearedUtc", appearedUtc)
                 .toString();
     }
