@@ -18,6 +18,6 @@ public interface LibraryClient {
     BookRecordDto getBookRecord(@PathVariable Integer bookId);
 
     @PutMapping("/{bookId}")
-    void setBookOnLoan(@PathVariable Integer bookId, @RequestBody BookRecordDto bookRecordDto);
+    void setBookStatus(@PathVariable Integer bookId, @RequestBody BookRecordDto bookRecordDto);
 
 }

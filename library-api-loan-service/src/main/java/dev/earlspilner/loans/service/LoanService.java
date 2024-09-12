@@ -10,5 +10,5 @@ import jakarta.servlet.http.HttpServletRequest;
 public interface LoanService {
     LoanDto addLoan(LoanDto dto, HttpServletRequest request);
     LoanDto getLoan(Integer loanId);
-    LoanDto returnBook(Integer bookId, BookRecordDto dto);
+    LoanDto returnBook(Integer bookId, HttpServletRequest request);
 }

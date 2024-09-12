@@ -31,12 +31,15 @@ public class LoanRestController implements LoanApi {
     }
 
     @Override
-    public ResponseEntity<LoanDto> getLoan(Integer loanId) {
-        return null;
+    @GetMapping("/{loanId}")
+    public ResponseEntity<LoanDto> getLoan(@PathVariable Integer loanId) {
+        return new ResponseEntity<>(loanService.getLoan(loanId), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<LoanDto> returnBook(Integer bookId, BookRecordDto dto) {
-        return null;
+    @PutMapping("/{bookId}")
+    public ResponseEntity<LoanDto> returnBook(@PathVariable Integer bookId, HttpServletRequest request) {
+        return new ResponseEntity<>(loanService.returnBook(bookId, request), HttpStatus.OK);
     }
+
 }
