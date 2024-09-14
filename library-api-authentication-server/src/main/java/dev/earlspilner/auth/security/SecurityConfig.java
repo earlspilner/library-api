@@ -27,12 +27,15 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http
+        // @formatter:off
+        http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(requests -> requests
+                .cors(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests((authz) -> authz
                         .anyRequest().permitAll())
-                .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
-                .build();
+                .sessionManagement(session -> session.sessionCreationPolicy(STATELESS));
+        // @formatter:on
+        return http.build();
     }
 
     @Bean
