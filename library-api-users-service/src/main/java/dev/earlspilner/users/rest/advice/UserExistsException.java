@@ -6,7 +6,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @ResponseStatus(BAD_REQUEST)
 public class UserExistsException extends RuntimeException {
-    public UserExistsException(String email) {
-        super("User already exists with email: " + email);
+    public UserExistsException(String message) {
+        super(message);
     }
 }
