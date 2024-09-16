@@ -149,10 +149,3 @@ Repeat the process for each service in the required order.
 ## Authentication and Authorization
 
 The system uses JWT tokens for authentication and authorization. After successful login via library-api-authentication-server, the client receives access and refresh tokens, which should be included in the Authorization header when making requests to other services.
-
-## API Documentation
-
-Each service has its own Swagger documentation available at:
-```arduino
-http://localhost:{$SERVICE_PORT}/swagger-ui.html
-```
