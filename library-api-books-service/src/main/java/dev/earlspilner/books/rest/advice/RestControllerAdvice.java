@@ -3,6 +3,7 @@ package dev.earlspilner.books.rest.advice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -24,6 +25,12 @@ public class RestControllerAdvice {
     public ResponseEntity<ProblemDetail> handleUnauthorizedOperationException(UnauthorizedOperationException e) {
         ProblemDetail problemDetail = createProblemDetail(HttpStatus.UNAUTHORIZED, e.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(problemDetail);
+    }
+
+    @ExceptionHandler(AuthorizationDeniedException.class)
+    public ResponseEntity<ProblemDetail> handleAuthorizationDeniedException(AuthorizationDeniedException e) {
+        ProblemDetail problemDetail = createProblemDetail(HttpStatus.FORBIDDEN, e.getMessage());
+        return ResponseEntity.status(FORBIDDEN).body(problemDetail);
     }
 
     @ExceptionHandler(BookExistsException.class)
