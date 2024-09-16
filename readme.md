@@ -4,6 +4,16 @@
 
 This project implements a microservices architecture for managing a library system. The system consists of several services, each responsible for its specific functionality.
 
+### Stack
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![Spring Data JPA](https://img.shields.io/badge/Spring%20Data%20JPA-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
+![MapStruct](https://img.shields.io/badge/MapStruct-006400?style=for-the-badge&logo=mapstruct&logoColor=white)
+
+
 ## Services
 
 ### 1. **Authentication Server**
@@ -149,10 +159,3 @@ Repeat the process for each service in the required order.
 ## Authentication and Authorization
 
 The system uses JWT tokens for authentication and authorization. After successful login via library-api-authentication-server, the client receives access and refresh tokens, which should be included in the Authorization header when making requests to other services.
-
-## API Documentation
-
-Each service has its own Swagger documentation available at:
-```arduino
-http://localhost:{$SERVICE_PORT}/swagger-ui.html
-```
