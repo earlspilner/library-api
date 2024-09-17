@@ -1,6 +1,6 @@
 # Library API Microservices
 
-[![Java Build Status](https://github.com/earlspilner/library-api/actions/workflows/maven-build.yml/badge.svg)](https://github.com/earlspilner/the-github-times/actions/workflows/maven-build.yml) [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Java Build Status](https://github.com/earlspilner/library-api/actions/workflows/maven-build.yml/badge.svg)](https://github.com/earlspilner/the-github-times/actions/workflows/maven-build.yml)
 
 This project implements a microservices architecture for managing a library system. The system consists of several services, each responsible for its specific functionality.
 
