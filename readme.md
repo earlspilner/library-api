@@ -2,6 +2,10 @@
 
 [![Java Build Status](https://github.com/earlspilner/library-api/actions/workflows/maven-build.yml/badge.svg)](https://github.com/earlspilner/the-github-times/actions/workflows/maven-build.yml)
 
+> **Note**
+> 
+> After adding a new user, you must create a bearer token (/login) and set it in the header of every request to other microservices
+
 This project implements a microservices architecture for managing a library system. The system consists of several services, each responsible for its specific functionality.
 
 ### Stack
@@ -15,7 +19,38 @@ This project implements a microservices architecture for managing a library syst
 
 ## Services
 
-### 1. **Authentication Server**
+### 1. **User Service**
+The user management service is responsible for storing and managing user accounts.
+
+- **Main features:**
+  - Managing user registration and details.
+
+- **Endpoints:**  
+  `POST /api/users`
+  ```
+  {
+    "name": "Alexander Dudkin",
+    "username": "thisdudkin",
+    "email": "alexraddan@gmail.com",
+    "password": "password"
+  }
+  ```
+
+  `GET /api/users/{username}`
+
+  `PUT /api/users/{username}`
+  ```
+  {
+    "name": "Ivan Prokopenya",
+    "username": "ongotaj",
+    "email": "ivan123@gmail.com",
+    "password": "password"
+  }
+  ```
+
+  `DELETE /api/users/{id}`
+
+### 2. **Authentication Server**
 The authentication service is responsible for issuing JWT tokens for users in the system.
 
 - **Main features:**
@@ -26,10 +61,16 @@ The authentication service is responsible for issuing JWT tokens for users in th
 - **Endpoints:**
     
   `POST /api/auth/login`
+  ```
+  {
+    "username": "thisdudkin",
+    "password": "password"
+  }
+  ```
   
   `POST /api/auth/refresh?refreshToken=`  
 
-### 2. **Books Service**
+### 3. **Books Service**
 The book management service handles operations related to books, including creation, updating, deletion, and retrieving information about books.
 
 - **Main features:**
@@ -38,22 +79,40 @@ The book management service handles operations related to books, including creat
 
 - **Endpoints:**  
   `POST /api/books`
+  ```
+  {
+    "isbn": "9785171624927",
+    "title": "Евгений Онегин",
+    "genre": "Роман",
+    "description": "Пронзительная любовная история, драматические повороты сюжета, тонкий психологизм персонажей, детальное описание быта и нравов той эпохи (не случайно Белинский назвал роман \"энциклопедией русской жизни\") – в этом произведении, как в зеркале, отразилась вся русская жизнь. \"Евгений Онегин\" никогда не утратит своей актуальности, и даже спустя два века мы поражаемся точности и верности \"ума холодных наблюдений и сердца горестных замет\" великого русского поэта.",
+    "author": "Александр Пушкин"
+  }
+  ```
 
   `GET /api/books/{bookId}`
   
   `GET /api/books/isbn/{isbn}`
 
   `PUT /api/books/{bookId}`
-
+  ```
+  {
+    "isbn": "978-5-00132-211-5",
+    "title": "Сказка о рыбаке и рыбке",
+    "genre": "Сказка",
+    "description": "Уже в дошкольном возрасте стоит прочитать малышам сказки великого поэта, познакомить их с чудесным миром, который он создал в своих произведениях и без которого мы уже не мыслим свою жизнь, своё духовное развитие.",
+    "author": "Александр Пушкин"
+  }
+  ```
+  
   `DELETE /api/books/{bookId}`
 
-### 3. **Discovery Server**
+### 4. **Discovery Server**
 The discovery server (Eureka) allows other services to register and discover each other dynamically within the microservices environment.
 
 - **Main features:**
   - Service registration and discovery.
 
-### 4. **API Gateway**
+### 5. **API Gateway**
 The API Gateway acts as the entry point to the system, routing requests to the appropriate services.
 
 - **Main features:**
@@ -61,22 +120,7 @@ The API Gateway acts as the entry point to the system, routing requests to the a
   - Centralized authentication and authorization.
 
 - **Endpoints:**  
-  `any request on port :8080` 
-
-### 5. **Library Service**
-The library management service stores information about available books in the library, including which book is free and which is on loan.
-
-- **Main features:**
-  - Store information about books in library
-
-- **Endpoints:**  
-  `POST /api/library`
-
-  `GET /api/library/{bookId}`
-
-  `PUT /api/library/{bookId}`
-
-  `DELETE /api/library/{bookId}`
+  `any request on port :8080`
 
 ### 6. **Loan Service**
 The loan service manages book loan information, including tracking due dates and book returns.
@@ -87,25 +131,30 @@ The loan service manages book loan information, including tracking due dates and
 
 - **Endpoints:**  
   `POST /api/loans`
+  ```
+  {
+    "bookId": 1
+  }
+  ```
 
   `GET /api/loans/{loanId}`
 
   `PUT /api/loans/{bookId}`
 
-### 7. **User Service**
-The user management service is responsible for storing and managing user accounts.
+### 7. **Library Service**
+The library management service stores information about available books in the library, including which book is free and which is on loan.
 
 - **Main features:**
-  - Managing user registration and details.
+  - Store information about books in library
 
-- **Endpoints:**  
-  `POST /api/users`
+- **Endpoints: (for internal requests!!!)**  
+  `POST /api/library`
 
-  `GET /api/users/{username}`
+  `GET /api/library/{bookId}`
 
-  `PUT /api/users/{username}`
+  `PUT /api/library/{bookId}`
 
-  `DELETE /api/users/{id}`
+  `DELETE /api/library/{bookId}`
 
 ## Architecture
 
