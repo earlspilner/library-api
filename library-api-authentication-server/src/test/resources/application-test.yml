@@ -1,0 +1,12 @@
+jwt:
+  expiration:
+    access: 300000
+    refresh: 3600000
+  secret:
+    key: e19ba244f8af0073843bd674448cdcb0ef30447ff6e2df36888c3b4dc15f2d30
+    ### for testing
+
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false

@@ -30,10 +30,10 @@ public class JwtCore {
     @Value("${jwt.secret.key}")
     private String secretKey;
 
-    @Value("${jwt.expiration.access}")
+    @Value("${jwt.expiration.access:300000}")
     private Long accessExpiration;
 
-    @Value("${jwt.expiration.refresh}")
+    @Value("${jwt.expiration.refresh:3600000}")
     private Long refreshExpiration;
 
     private Key key;
