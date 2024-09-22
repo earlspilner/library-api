@@ -1,6 +1,5 @@
-package dev.earlspilner.users.entity;
+package dev.earlspilner.users.model;
 
-import dev.earlspilner.users.security.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +8,7 @@ import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
 
-import static dev.earlspilner.users.security.UserRole.ROLE_VISITOR;
+import static dev.earlspilner.users.model.UserRole.ROLE_VISITOR;
 
 /**
  * @author Alexander Dudkin

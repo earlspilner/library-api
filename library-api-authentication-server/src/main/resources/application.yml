@@ -6,8 +6,8 @@ spring:
 
 eureka:
   client:
-    fetch-registry: true
-    register-with-eureka: true
+    fetch-registry: false
+    register-with-eureka: false
 
 server:
   port: 6969
@@ -17,4 +17,5 @@ server:
 logging:
   level:
     org.springframework.web: debug
+    org.springframework.security: debug
     dev.earlspilner.auth: debug

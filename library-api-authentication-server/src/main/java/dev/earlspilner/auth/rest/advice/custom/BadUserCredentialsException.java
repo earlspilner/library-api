@@ -1,4 +1,4 @@
-package dev.earlspilner.auth.rest.advice;
+package dev.earlspilner.auth.rest.advice.custom;
 
 public class BadUserCredentialsException extends RuntimeException {
     public BadUserCredentialsException(String message) {

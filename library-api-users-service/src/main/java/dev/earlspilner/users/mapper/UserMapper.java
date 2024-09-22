@@ -1,7 +1,7 @@
 package dev.earlspilner.users.mapper;
 
 import dev.earlspilner.users.dto.UserDto;
-import dev.earlspilner.users.entity.User;
+import dev.earlspilner.users.model.User;
 import org.mapstruct.Mapper;
 
 /**

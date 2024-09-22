@@ -1,4 +1,4 @@
-package dev.earlspilner.auth.security;
+package dev.earlspilner.auth.dto;
 
 import org.springframework.security.core.GrantedAuthority;
 

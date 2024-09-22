@@ -1,12 +1,12 @@
 package dev.earlspilner.users.service;
 
 import dev.earlspilner.users.dto.UserDto;
-import dev.earlspilner.users.entity.User;
+import dev.earlspilner.users.model.User;
 import dev.earlspilner.users.mapper.UserMapper;
 import dev.earlspilner.users.repository.UserRepository;
-import dev.earlspilner.users.rest.advice.UnauthorizedOperationException;
-import dev.earlspilner.users.rest.advice.UserExistsException;
-import dev.earlspilner.users.rest.advice.UserNotFoundException;
+import dev.earlspilner.users.rest.advice.custom.UnauthorizedOperationException;
+import dev.earlspilner.users.rest.advice.custom.UserExistsException;
+import dev.earlspilner.users.rest.advice.custom.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

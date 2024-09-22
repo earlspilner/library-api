@@ -1,9 +1,8 @@
-package dev.earlspilner.auth.security;
+package dev.earlspilner.users.security;
 
-import dev.earlspilner.auth.dto.UserDto;
-import dev.earlspilner.auth.feign.UserServiceClient;
+import dev.earlspilner.users.model.User;
+import dev.earlspilner.users.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,17 +15,16 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CustomUserDetails implements UserDetailsService {
 
-    private final UserServiceClient userClient;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDto user = userClient.getUser(username);
-        if (user == null)
-            throw new UsernameNotFoundException("User not found with username: " + username);
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
 
-        return User.withUsername(username)
-                .password(user.password())
-                .authorities(user.roles())
+        return org.springframework.security.core.userdetails.User
+                .withUsername(username)
+                .password(user.getPassword())
+                .authorities(user.getRoles())
                 .accountExpired(false)
                 .accountLocked(false)
                 .credentialsExpired(false)

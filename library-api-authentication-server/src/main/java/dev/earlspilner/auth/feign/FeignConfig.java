@@ -1,6 +1,7 @@
 package dev.earlspilner.auth.feign;
 
 import feign.RequestInterceptor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,12 +11,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FeignConfig {
 
-    // maybe a bad practice
+    @Value("${jwt.secret.key}")
+    private String secretKey;
+
     @Bean
-    public RequestInterceptor requestInterceptor() {
-        return requestTemplate -> {
-            requestTemplate.header("User-Agent", "Feign");
-        };
+    public RequestInterceptor feignRequestInterceptor() {
+        return requestTemplate -> requestTemplate.header("Feign-ID", secretKey);
     }
 
 }

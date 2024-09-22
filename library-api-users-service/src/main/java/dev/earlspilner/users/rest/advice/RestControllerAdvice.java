@@ -1,5 +1,8 @@
 package dev.earlspilner.users.rest.advice;
 
+import dev.earlspilner.users.rest.advice.custom.UnauthorizedOperationException;
+import dev.earlspilner.users.rest.advice.custom.UserExistsException;
+import dev.earlspilner.users.rest.advice.custom.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;

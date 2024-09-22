@@ -1,5 +1,7 @@
 package dev.earlspilner.auth.rest.advice;
 
+import dev.earlspilner.auth.rest.advice.custom.BadUserCredentialsException;
+import dev.earlspilner.auth.rest.advice.custom.CustomJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,12 @@ public class RestControllerAdvice {
     public ResponseEntity<ProblemDetail> handleException(Exception e) {
         ProblemDetail problemDetail = createProblemDetail(INTERNAL_SERVER_ERROR, e.getMessage());
         return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(problemDetail);
+    }
+
+    @ExceptionHandler(CustomJwtException.class)
+    public ResponseEntity<ProblemDetail> handleCustomJwtException(CustomJwtException e) {
+        ProblemDetail problemDetail = createProblemDetail(e.getHttpStatus(), e.getMessage());
+        return ResponseEntity.status(e.getHttpStatus()).body(problemDetail);
     }
 
     @ExceptionHandler(BadUserCredentialsException.class)

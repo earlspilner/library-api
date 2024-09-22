@@ -1,7 +1,6 @@
 package dev.earlspilner.auth.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import dev.earlspilner.auth.security.UserRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
