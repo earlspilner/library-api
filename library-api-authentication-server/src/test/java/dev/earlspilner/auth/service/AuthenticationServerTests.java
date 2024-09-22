@@ -5,6 +5,7 @@ import dev.earlspilner.auth.dto.Tokens;
 import dev.earlspilner.auth.dto.UserDto;
 import dev.earlspilner.auth.feign.UserServiceClient;
 import dev.earlspilner.auth.rest.advice.custom.BadUserCredentialsException;
+import dev.earlspilner.auth.security.JwtTokenProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -32,7 +33,7 @@ class AuthenticationServerTests {
     private AuthenticationServerImpl authenticationServer;
 
     @Mock
-    private JwtCore jwtCore;
+    private JwtTokenProvider jwtTokenProvider;
 
     @Mock
     private UserServiceClient feignClient;
@@ -57,13 +58,13 @@ class AuthenticationServerTests {
         when(feignClient.getUser(authDto.username())).thenReturn(userDto);
         when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
                 .thenReturn(new UsernamePasswordAuthenticationToken("user", "password"));
-        when(jwtCore.createTokens(userDto.username(), userDto.roles())).thenReturn(tokens);
+        when(jwtTokenProvider.createTokens(userDto.username(), userDto.roles())).thenReturn(tokens);
 
         Tokens result = authenticationServer.authenticate(authDto);
 
         verify(feignClient).getUser(authDto.username());
         verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
-        verify(jwtCore).createTokens(userDto.username(), userDto.roles());
+        verify(jwtTokenProvider).createTokens(userDto.username(), userDto.roles());
         assertEquals(tokens, result);
     }
 
@@ -85,15 +86,15 @@ class AuthenticationServerTests {
         UserDto userDto = new UserDto(1, "User Name", username, "user@example.com", "encodedPassword", null, null, List.of());
         Tokens tokens = new Tokens("new-access-token", "new-refresh-token");
 
-        when(jwtCore.getUsername(refreshToken)).thenReturn(username);
+        when(jwtTokenProvider.getUsername(refreshToken)).thenReturn(username);
         when(feignClient.getUser(username)).thenReturn(userDto);
-        when(jwtCore.createTokens(userDto.username(), userDto.roles())).thenReturn(tokens);
+        when(jwtTokenProvider.createTokens(userDto.username(), userDto.roles())).thenReturn(tokens);
 
         Tokens result = authenticationServer.refresh(refreshToken);
 
-        verify(jwtCore).getUsername(refreshToken);
+        verify(jwtTokenProvider).getUsername(refreshToken);
         verify(feignClient).getUser(username);
-        verify(jwtCore).createTokens(userDto.username(), userDto.roles());
+        verify(jwtTokenProvider).createTokens(userDto.username(), userDto.roles());
         assertEquals(tokens, result);
     }
 
@@ -102,7 +103,7 @@ class AuthenticationServerTests {
         String refreshToken = "invalid-refresh-token";
         String username = "user";
 
-        when(jwtCore.getUsername(refreshToken)).thenReturn(username);
+        when(jwtTokenProvider.getUsername(refreshToken)).thenReturn(username);
         when(feignClient.getUser(username)).thenReturn(null);
 
         assertThrows(UsernameNotFoundException.class, () -> authenticationServer.refresh(refreshToken));
