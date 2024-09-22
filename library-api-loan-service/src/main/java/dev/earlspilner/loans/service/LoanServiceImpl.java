@@ -1,15 +1,15 @@
 package dev.earlspilner.loans.service;
 
-import dev.earlspilner.loans.config.LibraryClient;
-import dev.earlspilner.loans.config.UserClient;
+import dev.earlspilner.loans.feign.LibraryClient;
+import dev.earlspilner.loans.feign.UserClient;
 import dev.earlspilner.loans.dto.BookRecordDto;
 import dev.earlspilner.loans.dto.LoanDto;
 import dev.earlspilner.loans.dto.UserDto;
-import dev.earlspilner.loans.entity.Loan;
+import dev.earlspilner.loans.model.Loan;
 import dev.earlspilner.loans.mapper.LoanMapper;
 import dev.earlspilner.loans.repository.LoanRepository;
-import dev.earlspilner.loans.rest.advice.LoanNotFoundException;
-import dev.earlspilner.loans.security.JwtCore;
+import dev.earlspilner.loans.rest.advice.custom.LoanNotFoundException;
+import dev.earlspilner.loans.security.JwtTokenProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,15 +26,15 @@ import static dev.earlspilner.loans.dto.BookStatus.ON_LOAN;
 @Service
 public class LoanServiceImpl implements LoanService {
 
-    private final JwtCore jwtCore;
+    private final JwtTokenProvider jwtTokenProvider;
     private final UserClient userClient;
     private final LoanMapper loanMapper;
     private final LibraryClient libraryClient;
     private final LoanRepository loanRepository;
 
     @Autowired
-    public LoanServiceImpl(JwtCore jwtCore, UserClient userClient, LoanMapper loanMapper, LibraryClient libraryClient, LoanRepository loanRepository) {
-        this.jwtCore = jwtCore;
+    public LoanServiceImpl(JwtTokenProvider jwtTokenProvider, UserClient userClient, LoanMapper loanMapper, LibraryClient libraryClient, LoanRepository loanRepository) {
+        this.jwtTokenProvider = jwtTokenProvider;
         this.userClient = userClient;
         this.loanMapper = loanMapper;
         this.libraryClient = libraryClient;
@@ -49,7 +49,7 @@ public class LoanServiceImpl implements LoanService {
             throw new UnsupportedOperationException("You can't take this book right now");
         }
 
-        UserDto userDto = userClient.getUser(jwtCore.getUsernameFromToken(jwtCore.getTokenFromRequest(request)));
+        UserDto userDto = userClient.getUser(jwtTokenProvider.getUsername(jwtTokenProvider.resolveToken(request)));
         libraryClient.setBookStatus(dto.bookId(), new BookRecordDto(null, ON_LOAN));
         Loan loan = new Loan(userDto.id(), dto.bookId());
         return loanMapper.toLoanDto(loanRepository.save(loan));
@@ -69,7 +69,7 @@ public class LoanServiceImpl implements LoanService {
             throw new IllegalArgumentException("You can't return this book right now");
         }
 
-        UserDto userDto = userClient.getUser(jwtCore.getUsernameFromToken(jwtCore.getTokenFromRequest(request)));
+        UserDto userDto = userClient.getUser(jwtTokenProvider.getUsername(jwtTokenProvider.resolveToken(request)));
         Loan loan = loanRepository.findByBookIdAndUserIdAndReturnedAtIsNull(bookId, userDto.id())
                 .orElseThrow(() -> new LoanNotFoundException("Loan not found with bookId '" + bookId + "' and userId '" + userDto.id() + "'"));
         loan.setReturnedAt(Instant.now());

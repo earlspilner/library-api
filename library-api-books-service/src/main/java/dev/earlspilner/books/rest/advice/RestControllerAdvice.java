@@ -1,5 +1,8 @@
 package dev.earlspilner.books.rest.advice;
 
+import dev.earlspilner.books.rest.advice.custom.BookExistsException;
+import dev.earlspilner.books.rest.advice.custom.BookNotFoundException;
+import dev.earlspilner.books.rest.advice.custom.UnauthorizedOperationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;

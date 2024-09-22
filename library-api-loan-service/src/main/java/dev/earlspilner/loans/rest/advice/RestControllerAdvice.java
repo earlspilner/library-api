@@ -1,5 +1,7 @@
 package dev.earlspilner.loans.rest.advice;
 
+import dev.earlspilner.loans.rest.advice.custom.LoanNotFoundException;
+import dev.earlspilner.loans.rest.advice.custom.UnauthorizedOperationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;

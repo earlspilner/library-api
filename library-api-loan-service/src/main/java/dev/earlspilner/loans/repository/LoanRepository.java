@@ -1,6 +1,6 @@
 package dev.earlspilner.loans.repository;
 
-import dev.earlspilner.loans.entity.Loan;
+import dev.earlspilner.loans.model.Loan;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

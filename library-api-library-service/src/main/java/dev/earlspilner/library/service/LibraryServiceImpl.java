@@ -4,7 +4,7 @@ import dev.earlspilner.library.dto.BookRecordDto;
 import dev.earlspilner.library.mapper.BookRecordMapper;
 import dev.earlspilner.library.model.BookRecord;
 import dev.earlspilner.library.repository.BookRecordRepository;
-import dev.earlspilner.library.rest.advice.BookRecordNotFoundException;
+import dev.earlspilner.library.rest.advice.custom.BookRecordNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

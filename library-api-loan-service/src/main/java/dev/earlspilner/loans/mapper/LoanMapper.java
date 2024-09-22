@@ -1,7 +1,7 @@
 package dev.earlspilner.loans.mapper;
 
 import dev.earlspilner.loans.dto.LoanDto;
-import dev.earlspilner.loans.entity.Loan;
+import dev.earlspilner.loans.model.Loan;
 import org.mapstruct.Mapper;
 
 /**

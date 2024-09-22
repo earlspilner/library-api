@@ -1,4 +1,4 @@
-package dev.earlspilner.loans.dto;
+package dev.earlspilner.library.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.Email;

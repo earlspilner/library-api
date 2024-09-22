@@ -1,6 +1,6 @@
 package dev.earlspilner.books.repository;
 
-import dev.earlspilner.books.entity.Book;
+import dev.earlspilner.books.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

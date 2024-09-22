@@ -1,14 +1,13 @@
 package dev.earlspilner.books.service;
 
-import dev.earlspilner.books.config.LibraryClient;
+import dev.earlspilner.books.feign.LibraryClient;
 import dev.earlspilner.books.dto.BookDto;
 import dev.earlspilner.books.dto.BookRecordDto;
-import dev.earlspilner.books.dto.BookStatus;
-import dev.earlspilner.books.entity.Book;
+import dev.earlspilner.books.model.Book;
 import dev.earlspilner.books.mapper.BookMapper;
 import dev.earlspilner.books.repository.BookRepository;
-import dev.earlspilner.books.rest.advice.BookExistsException;
-import dev.earlspilner.books.rest.advice.BookNotFoundException;
+import dev.earlspilner.books.rest.advice.custom.BookExistsException;
+import dev.earlspilner.books.rest.advice.custom.BookNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

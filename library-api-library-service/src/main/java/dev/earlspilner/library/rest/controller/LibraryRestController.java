@@ -23,7 +23,7 @@ public class LibraryRestController implements LibraryApi {
 
     @Override
     @PostMapping
-    public ResponseEntity<BookRecordDto> addBootRecord(@RequestBody BookRecordDto dto) {
+    public ResponseEntity<BookRecordDto> addBookRecord(@RequestBody BookRecordDto dto) {
         return new ResponseEntity<>(libraryService.addBookRecord(dto), HttpStatus.CREATED);
     }
 

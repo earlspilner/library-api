@@ -1,5 +1,7 @@
 package dev.earlspilner.library.rest.advice;
 
+import dev.earlspilner.library.rest.advice.custom.BookRecordNotFoundException;
+import dev.earlspilner.library.rest.advice.custom.UnauthorizedOperationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
