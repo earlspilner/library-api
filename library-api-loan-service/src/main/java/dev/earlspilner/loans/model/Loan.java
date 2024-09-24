@@ -20,23 +20,23 @@ public class Loan {
     private Integer id;
 
     @Setter
-    @Column(name = "userId", nullable = false, updatable = false)
+    @Column(name = "user_id", nullable = false, updatable = false)
     private Integer userId;
 
     @Setter
-    @Column(name = "bookId", nullable = false, updatable = false)
+    @Column(name = "book_id", nullable = false, updatable = false)
     private Integer bookId;
 
     @Setter
-    @Column(name = "issuedAt", nullable = false)
+    @Column(name = "issued_at", nullable = false)
     private Instant issuedAt;
 
     @Setter
-    @Column(name = "dueTo", nullable = false)
+    @Column(name = "due_to", nullable = false)
     private Instant dueTo;
 
     @Setter
-    @Column(name = "returnedAt")
+    @Column(name = "returned_at")
     private Instant returnedAt;
 
     @PrePersist
