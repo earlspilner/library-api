@@ -19,19 +19,19 @@ public class Book {
     private Integer id;
 
     @Setter
-    @Column(name = "isbn", nullable = false, unique = true)
+    @Column(name = "isbn", nullable = false, unique = true, length = 20)
     private String isbn;
 
     @Setter
-    @Column(name = "title", nullable = false, length = 8192)
+    @Column(name = "title", nullable = false)
     private String title;
 
     @Setter
-    @Column(name = "genre", nullable = false, unique = true)
+    @Column(name = "genre", nullable = false)
     private String genre;
 
     @Setter
-    @Column(name = "description", nullable = false, length = 8192)
+    @Column(name = "description", nullable = false, length = 2000)
     private String description;
 
     @Setter
@@ -39,7 +39,7 @@ public class Book {
     private String author;
 
     @Setter
-    @Column(name = "appearedUtc", nullable = false, updatable = false)
+    @Column(name = "appeared_utc", nullable = false, updatable = false)
     private Instant appearedUtc;
 
     @PrePersist
