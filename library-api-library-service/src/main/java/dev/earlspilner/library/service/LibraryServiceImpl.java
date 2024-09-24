@@ -39,11 +39,11 @@ public class LibraryServiceImpl implements LibraryService {
     @Override
     public BookRecordDto updateBookRecord(Integer bookId, BookRecordDto dto) {
         if (dto.status() == null) {
-            throw new IllegalArgumentException("Book record status is not configured for this operation");
+            throw new IllegalArgumentException("The book status is not set up for this operation.");
         }
 
-        BookRecord bookRecord = bookRecordRepository.findById(bookId)
-                .orElseThrow(() -> new BookRecordNotFoundException("Book not found with ID: " + bookId));
+        BookRecord bookRecord = bookRecordRepository.findByBookId(bookId)
+                .orElseThrow(() -> new BookRecordNotFoundException("Book record not found with ID: " + bookId));
 
         bookRecord.setStatus(dto.status());
         return bookRecordMapper.toDto(bookRecordRepository.save(bookRecord));

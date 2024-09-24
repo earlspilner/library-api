@@ -46,12 +46,36 @@ public class LoanServiceImpl implements LoanService {
     public LoanDto addLoan(LoanDto dto, HttpServletRequest request) {
         BookRecordDto bookRecord = libraryClient.getBookRecord(dto.bookId());
         if (bookRecord == null || bookRecord.status() == ON_LOAN) {
-            throw new UnsupportedOperationException("You can't take this book right now");
+            throw new UnsupportedOperationException("The book is not available.");
         }
 
         UserDto userDto = userClient.getUser(jwtTokenProvider.getUsername(jwtTokenProvider.resolveToken(request)));
+
         libraryClient.setBookStatus(dto.bookId(), new BookRecordDto(null, ON_LOAN));
+
         Loan loan = new Loan(userDto.id(), dto.bookId());
+        return loanMapper.toLoanDto(loanRepository.save(loan));
+    }
+
+    @Override
+    public LoanDto returnBook(Integer bookId, HttpServletRequest request) {
+        BookRecordDto bookRecord = libraryClient.getBookRecord(bookId);
+        if (bookRecord == null || bookRecord.status() == IN_LIBRARY) {
+            throw new IllegalArgumentException("The book is already in the library.");
+        }
+
+        UserDto userDto = userClient.getUser(jwtTokenProvider.getUsername(jwtTokenProvider.resolveToken(request)));
+
+        Loan loan = loanRepository.findByBookIdAndReturnedAtIsNull(bookId)
+                .orElseThrow(() -> new LoanNotFoundException("Loan not found for book with ID '" + bookId + "' and user with ID '" + userDto.id() + "'"));
+
+        if (!loan.getUserId().equals(userDto.id())) {
+            throw new UnsupportedOperationException("You did not borrow this book, it was borrowed by another user.");
+        }
+
+        loan.setReturnedAt(Instant.now());
+        libraryClient.setBookStatus(bookId, new BookRecordDto(null, IN_LIBRARY));
+
         return loanMapper.toLoanDto(loanRepository.save(loan));
     }
 
@@ -60,20 +84,5 @@ public class LoanServiceImpl implements LoanService {
         return loanRepository.findById(loanId)
                 .map(loanMapper::toLoanDto)
                 .orElseThrow(() -> new LoanNotFoundException("Loan not found with ID: " + loanId));
-    }
-
-    @Override
-    public LoanDto returnBook(Integer bookId, HttpServletRequest request) {
-        BookRecordDto bookRecord = libraryClient.getBookRecord(bookId);
-        if (bookRecord == null || bookRecord.status() == IN_LIBRARY) {
-            throw new IllegalArgumentException("You can't return this book right now");
-        }
-
-        UserDto userDto = userClient.getUser(jwtTokenProvider.getUsername(jwtTokenProvider.resolveToken(request)));
-        Loan loan = loanRepository.findByBookIdAndUserIdAndReturnedAtIsNull(bookId, userDto.id())
-                .orElseThrow(() -> new LoanNotFoundException("Loan not found with bookId '" + bookId + "' and userId '" + userDto.id() + "'"));
-        loan.setReturnedAt(Instant.now());
-        libraryClient.setBookStatus(bookId, new BookRecordDto(null, IN_LIBRARY));
-        return loanMapper.toLoanDto(loanRepository.save(loan));
     }
 }
