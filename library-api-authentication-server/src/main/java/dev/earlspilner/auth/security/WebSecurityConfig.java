@@ -40,6 +40,10 @@ public class WebSecurityConfig {
         http.authorizeHttpRequests((authz) -> authz
                 .requestMatchers("/auth/login").permitAll()
                 .requestMatchers("/auth/refresh").permitAll()
+                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .requestMatchers("/api-docs/openapi.yml").permitAll()
+                .requestMatchers("/swagger-resources/**").permitAll()
+                .requestMatchers("/webjars/**").permitAll()
                 // Disallow everything else...
                 .anyRequest().authenticated());
 
