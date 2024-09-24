@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author Alexander Dudkin
  */
 @FeignClient(
-        value = "users-service",
-        url = "http://localhost:9091/api",
+        name = "users-service",
         configuration = FeignConfig.class
 )
 public interface UserClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/users/{username}")
+    @RequestMapping(method = RequestMethod.GET, value = "/api/users/{username}")
     UserDto getUser(@PathVariable String username);
 
 }

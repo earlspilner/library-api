@@ -1,7 +1,7 @@
 package dev.earlspilner.auth.security;
 
 import dev.earlspilner.auth.dto.UserDto;
-import dev.earlspilner.auth.feign.UserServiceClient;
+import dev.earlspilner.auth.feign.UserClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CustomUserDetails implements UserDetailsService {
 
-    private final UserServiceClient userClient;
+    private final UserClient userClient;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

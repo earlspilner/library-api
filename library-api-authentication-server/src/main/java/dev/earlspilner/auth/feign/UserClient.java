@@ -10,18 +10,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author Alexander Dudkin
  */
 @FeignClient(
-        value = "users-service",
-        url = "http://localhost:9091/api/",
+        name = "users-service",
         configuration = FeignConfig.class
 )
-public interface UserServiceClient {
+public interface UserClient {
 
     /**
      * Synchronized request to User Service to collect User Details
      * @param  username is a unique identifier of user
      * @return {@code UserDto} data transfer object
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/users/{username}")
+    @RequestMapping(method = RequestMethod.GET, value = "/api/users/{username}")
     UserDto getUser(@PathVariable String username);
 
 }

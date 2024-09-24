@@ -3,7 +3,7 @@ package dev.earlspilner.auth.service;
 import dev.earlspilner.auth.dto.AuthDto;
 import dev.earlspilner.auth.dto.Tokens;
 import dev.earlspilner.auth.dto.UserDto;
-import dev.earlspilner.auth.feign.UserServiceClient;
+import dev.earlspilner.auth.feign.UserClient;
 import dev.earlspilner.auth.rest.advice.custom.BadUserCredentialsException;
 import dev.earlspilner.auth.security.JwtTokenProvider;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,7 +36,7 @@ class AuthenticationServerTests {
     private JwtTokenProvider jwtTokenProvider;
 
     @Mock
-    private UserServiceClient feignClient;
+    private UserClient feignClient;
 
     @Mock
     private PasswordEncoder passwordEncoder;

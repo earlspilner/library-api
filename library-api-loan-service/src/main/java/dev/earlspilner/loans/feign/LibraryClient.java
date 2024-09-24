@@ -9,15 +9,14 @@ import org.springframework.web.bind.annotation.*;
  */
 @FeignClient(
         name = "library-service",
-        url = "http://localhost:9094/api",
         configuration = FeignConfig.class
 )
 public interface LibraryClient {
 
-    @GetMapping("/library/{bookId}")
+    @GetMapping("/api/library/{bookId}")
     BookRecordDto getBookRecord(@PathVariable Integer bookId);
 
-    @PutMapping("/library/{bookId}")
+    @PutMapping("/api/library/{bookId}")
     void setBookStatus(@PathVariable Integer bookId, @RequestBody BookRecordDto bookRecordDto);
 
 }

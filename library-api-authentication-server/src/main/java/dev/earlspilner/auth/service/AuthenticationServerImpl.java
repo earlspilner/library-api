@@ -3,7 +3,7 @@ package dev.earlspilner.auth.service;
 import dev.earlspilner.auth.dto.AuthDto;
 import dev.earlspilner.auth.dto.Tokens;
 import dev.earlspilner.auth.dto.UserDto;
-import dev.earlspilner.auth.feign.UserServiceClient;
+import dev.earlspilner.auth.feign.UserClient;
 import dev.earlspilner.auth.rest.advice.custom.BadUserCredentialsException;
 import dev.earlspilner.auth.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +21,13 @@ import org.springframework.stereotype.Service;
 public class AuthenticationServerImpl implements AuthenticationServer {
 
     private final JwtTokenProvider jwtTokenProvider;
-    private final UserServiceClient feignClient;
+    private final UserClient feignClient;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
     @Autowired
     public AuthenticationServerImpl(JwtTokenProvider jwtTokenProvider,
-                                    UserServiceClient feignClient,
+                                    UserClient feignClient,
                                     PasswordEncoder passwordEncoder,
                                     AuthenticationManager authenticationManager) {
         this.jwtTokenProvider = jwtTokenProvider;

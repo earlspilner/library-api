@@ -12,15 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 @FeignClient(
         name = "library-service",
-        url = "http://localhost:9094/api/library",
         configuration = FeignConfig.class
 )
 public interface LibraryClient {
 
-    @PostMapping
+    @PostMapping("/api/library")
     void addBookRecord(@RequestBody BookRecordDto dto);
 
-    @DeleteMapping("/{bookId}")
+    @DeleteMapping("/api/library/{bookId}")
     void deleteBookRecord(@PathVariable Integer bookId);
 
 }
