@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS library (
+    id SERIAL PRIMARY KEY,
+    book_id BIGINT NOT NULL UNIQUE,
+    status VARCHAR(20) NOT NULL,
+    created_utc TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_library_book_id ON library (book_id);
+
+ALTER SEQUENCE library_id_seq RESTART WITH 135;
