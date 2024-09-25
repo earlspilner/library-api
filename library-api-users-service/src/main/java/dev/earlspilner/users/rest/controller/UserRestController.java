@@ -39,6 +39,7 @@ public class UserRestController implements UsersApi {
 
     @Override
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Page<UserDto>> getUsers(Pageable pageable) {
         return new ResponseEntity<>(userService.getUsers(pageable), HttpStatus.OK);
     }

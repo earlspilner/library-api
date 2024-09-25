@@ -37,9 +37,9 @@ public class LoanRestController implements LoanApi {
     }
 
     @Override
-    @PutMapping("/{bookId}")
-    public ResponseEntity<LoanDto> returnBook(@PathVariable Integer bookId, HttpServletRequest request) {
-        return new ResponseEntity<>(loanService.returnBook(bookId, request), HttpStatus.OK);
+    @PutMapping("/{loanId}/return")
+    public ResponseEntity<LoanDto> returnBook(@PathVariable Integer loanId, HttpServletRequest request) {
+        return new ResponseEntity<>(loanService.returnBook(loanId, request), HttpStatus.OK);
     }
 
 }

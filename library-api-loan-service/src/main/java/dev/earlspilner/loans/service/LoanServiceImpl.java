@@ -58,23 +58,29 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public LoanDto returnBook(Integer bookId, HttpServletRequest request) {
-        BookRecordDto bookRecord = libraryClient.getBookRecord(bookId);
+    public LoanDto returnBook(Integer loanId, HttpServletRequest request) {
+        Loan loan = loanRepository.findById(loanId)
+                .orElseThrow(() -> new LoanNotFoundException("Loan not found for ID '" + loanId + "'"));
+
+        if (loan.getReturnedAt() != null) {
+            throw new IllegalArgumentException("The book has already been returned.");
+        }
+
+        BookRecordDto bookRecord = libraryClient.getBookRecord(loan.getBookId());
         if (bookRecord == null || bookRecord.status() == IN_LIBRARY) {
             throw new IllegalArgumentException("The book is already in the library.");
         }
 
-        UserDto userDto = userClient.getUser(jwtTokenProvider.getUsername(jwtTokenProvider.resolveToken(request)));
-
-        Loan loan = loanRepository.findByBookIdAndReturnedAtIsNull(bookId)
-                .orElseThrow(() -> new LoanNotFoundException("Loan not found for book with ID '" + bookId + "' and user with ID '" + userDto.id() + "'"));
+        String username = jwtTokenProvider.getUsername(jwtTokenProvider.resolveToken(request));
+        UserDto userDto = userClient.getUser(username);
 
         if (!loan.getUserId().equals(userDto.id())) {
             throw new UnsupportedOperationException("You did not borrow this book, it was borrowed by another user.");
         }
 
         loan.setReturnedAt(Instant.now());
-        libraryClient.setBookStatus(bookId, new BookRecordDto(null, IN_LIBRARY));
+
+        libraryClient.setBookStatus(loan.getBookId(), new BookRecordDto(null, IN_LIBRARY));
 
         return loanMapper.toLoanDto(loanRepository.save(loan));
     }
