@@ -9,5 +9,3 @@ CREATE TABLE IF NOT EXISTS books (
 );
 
 CREATE INDEX IF NOT EXISTS idx_books_isbn ON books (isbn);
-
-ALTER SEQUENCE books_id_seq RESTART WITH 100;

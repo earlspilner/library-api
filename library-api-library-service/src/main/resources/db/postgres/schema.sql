@@ -6,5 +6,3 @@ CREATE TABLE IF NOT EXISTS library (
 );
 
 CREATE INDEX IF NOT EXISTS idx_library_book_id ON library (book_id);
-
-ALTER SEQUENCE library_id_seq RESTART WITH 135;

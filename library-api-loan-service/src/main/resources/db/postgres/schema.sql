@@ -9,5 +9,3 @@ CREATE TABLE IF NOT EXISTS loans (
 
 CREATE INDEX IF NOT EXISTS idx_loans_user_id ON loans (user_id);
 CREATE INDEX IF NOT EXISTS idx_loans_book_id ON loans (book_id);
-
-ALTER SEQUENCE loans_id_seq RESTART WITH 100;

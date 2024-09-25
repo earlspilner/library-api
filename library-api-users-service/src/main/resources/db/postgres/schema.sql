@@ -10,8 +10,6 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE INDEX IF NOT EXISTS idx_users_username ON users (username);
 
-ALTER SEQUENCE users_id_seq RESTART WITH 100;
-
 CREATE TABLE IF NOT EXISTS user_roles (
     user_id BIGINT NOT NULL,
     user_role VARCHAR(50) NOT NULL,
