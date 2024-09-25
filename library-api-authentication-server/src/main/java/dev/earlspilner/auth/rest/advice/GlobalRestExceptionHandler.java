@@ -1,12 +1,11 @@
-package dev.earlspilner.users.rest.advice;
+package dev.earlspilner.auth.rest.advice;
 
-import dev.earlspilner.users.rest.advice.custom.UnauthorizedOperationException;
-import dev.earlspilner.users.rest.advice.custom.UserExistsException;
-import dev.earlspilner.users.rest.advice.custom.UserNotFoundException;
+import dev.earlspilner.auth.rest.advice.custom.BadUserCredentialsException;
+import dev.earlspilner.auth.rest.advice.custom.CustomJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authorization.AuthorizationDeniedException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -24,17 +23,15 @@ public class GlobalRestExceptionHandler {
     private static final Map<Class<? extends Exception>, HttpStatus> exceptionStatusMap = new ConcurrentHashMap<>();
 
     static {
-        exceptionStatusMap.put(UnauthorizedOperationException.class, UNAUTHORIZED);
-        exceptionStatusMap.put(AuthorizationDeniedException.class, FORBIDDEN);
-        exceptionStatusMap.put(UserExistsException.class, CONFLICT);
-        exceptionStatusMap.put(UserNotFoundException.class, NOT_FOUND);
+        exceptionStatusMap.put(CustomJwtException.class, UNAUTHORIZED);
+        exceptionStatusMap.put(BadUserCredentialsException.class, BAD_REQUEST);
+        exceptionStatusMap.put(UsernameNotFoundException.class, NOT_FOUND);
     }
 
     @ExceptionHandler({
-            UnauthorizedOperationException.class,
-            AuthorizationDeniedException.class,
-            UserExistsException.class,
-            UserNotFoundException.class
+            CustomJwtException.class,
+            BadUserCredentialsException.class,
+            UsernameNotFoundException.class,
     })
     public ResponseEntity<ProblemDetail> handleException(Exception e) {
         HttpStatus status = exceptionStatusMap.getOrDefault(e.getClass(), INTERNAL_SERVER_ERROR);

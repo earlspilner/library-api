@@ -1,8 +1,8 @@
-package dev.earlspilner.users.rest.advice;
+package dev.earlspilner.books.rest.advice;
 
-import dev.earlspilner.users.rest.advice.custom.UnauthorizedOperationException;
-import dev.earlspilner.users.rest.advice.custom.UserExistsException;
-import dev.earlspilner.users.rest.advice.custom.UserNotFoundException;
+import dev.earlspilner.books.rest.advice.custom.BookExistsException;
+import dev.earlspilner.books.rest.advice.custom.BookNotFoundException;
+import dev.earlspilner.books.rest.advice.custom.UnauthorizedOperationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -26,15 +26,17 @@ public class GlobalRestExceptionHandler {
     static {
         exceptionStatusMap.put(UnauthorizedOperationException.class, UNAUTHORIZED);
         exceptionStatusMap.put(AuthorizationDeniedException.class, FORBIDDEN);
-        exceptionStatusMap.put(UserExistsException.class, CONFLICT);
-        exceptionStatusMap.put(UserNotFoundException.class, NOT_FOUND);
+        exceptionStatusMap.put(BookExistsException.class, BAD_REQUEST);
+        exceptionStatusMap.put(BookNotFoundException.class, NOT_FOUND);
+        exceptionStatusMap.put(IllegalArgumentException.class, BAD_REQUEST);
     }
 
     @ExceptionHandler({
             UnauthorizedOperationException.class,
             AuthorizationDeniedException.class,
-            UserExistsException.class,
-            UserNotFoundException.class
+            BookExistsException.class,
+            BookNotFoundException.class,
+            IllegalArgumentException.class,
     })
     public ResponseEntity<ProblemDetail> handleException(Exception e) {
         HttpStatus status = exceptionStatusMap.getOrDefault(e.getClass(), INTERNAL_SERVER_ERROR);

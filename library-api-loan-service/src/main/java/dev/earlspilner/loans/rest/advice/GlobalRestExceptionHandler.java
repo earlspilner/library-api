@@ -1,8 +1,7 @@
-package dev.earlspilner.users.rest.advice;
+package dev.earlspilner.loans.rest.advice;
 
-import dev.earlspilner.users.rest.advice.custom.UnauthorizedOperationException;
-import dev.earlspilner.users.rest.advice.custom.UserExistsException;
-import dev.earlspilner.users.rest.advice.custom.UserNotFoundException;
+import dev.earlspilner.loans.rest.advice.custom.LoanNotFoundException;
+import dev.earlspilner.loans.rest.advice.custom.UnauthorizedOperationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -26,15 +25,15 @@ public class GlobalRestExceptionHandler {
     static {
         exceptionStatusMap.put(UnauthorizedOperationException.class, UNAUTHORIZED);
         exceptionStatusMap.put(AuthorizationDeniedException.class, FORBIDDEN);
-        exceptionStatusMap.put(UserExistsException.class, CONFLICT);
-        exceptionStatusMap.put(UserNotFoundException.class, NOT_FOUND);
+        exceptionStatusMap.put(UnsupportedOperationException.class, UNPROCESSABLE_ENTITY);
+        exceptionStatusMap.put(LoanNotFoundException.class, NOT_FOUND);
     }
 
     @ExceptionHandler({
             UnauthorizedOperationException.class,
             AuthorizationDeniedException.class,
-            UserExistsException.class,
-            UserNotFoundException.class
+            UnsupportedOperationException.class,
+            LoanNotFoundException.class
     })
     public ResponseEntity<ProblemDetail> handleException(Exception e) {
         HttpStatus status = exceptionStatusMap.getOrDefault(e.getClass(), INTERNAL_SERVER_ERROR);
