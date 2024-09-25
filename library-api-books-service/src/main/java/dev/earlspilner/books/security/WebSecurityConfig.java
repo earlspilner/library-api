@@ -16,7 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
  * @author Alexander Dudkin
  */
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
