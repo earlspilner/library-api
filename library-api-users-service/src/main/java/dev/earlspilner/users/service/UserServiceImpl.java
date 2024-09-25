@@ -89,13 +89,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
 
-        String authenticatedUsername = getAuthenticatedUsername();
-
-        if (!authenticatedUsername.equals(user.getUsername())) {
-            throw new UnauthorizedOperationException("You are not allowed to delete this user.");
-        }
-
-        userRepository.deleteById(id);
+        userRepository.delete(user);
     }
 
     private String getAuthenticatedUsername() {
