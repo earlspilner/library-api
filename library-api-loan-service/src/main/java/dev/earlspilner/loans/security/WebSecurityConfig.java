@@ -39,6 +39,10 @@ public class WebSecurityConfig {
                     String feignId = request.getHeader("Feign-ID");
                     return feignId != null && feignId.equals(jwtTokenProvider.getSecretKey());
                 }).permitAll()
+                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .requestMatchers("/api-docs/openapi.yml").permitAll()
+                .requestMatchers("/swagger-resources/**").permitAll()
+                .requestMatchers("/webjars/**").permitAll()
                 // Disallow everything else...
                 .anyRequest().authenticated());
 
