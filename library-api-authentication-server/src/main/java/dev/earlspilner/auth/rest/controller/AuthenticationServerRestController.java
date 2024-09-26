@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +42,7 @@ public class AuthenticationServerRestController implements AuthenticationServerA
             description = "Login credentials",
             required = true,
             content = @Content(schema = @Schema(implementation = AuthDto.class)))
-                                        @RequestBody AuthDto authDto) {
+                                        @Valid @RequestBody AuthDto authDto) {
         return new ResponseEntity<>(authenticationServer.authenticate(authDto), HttpStatus.CREATED);
     }
 
