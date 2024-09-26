@@ -13,8 +13,6 @@ import java.util.Map;
 @Service
 public class RetrieveMessageErrorDecoder implements ErrorDecoder {
 
-    private final ErrorDecoder errorDecoder = new Default();
-
     @Autowired
     private Map<String, FeignExceptionHandler> feignExceptionHandlers;
 
