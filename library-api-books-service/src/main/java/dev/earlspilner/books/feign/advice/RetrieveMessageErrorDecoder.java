@@ -1,4 +1,4 @@
-package dev.earlspilner.auth.feign.advice;
+package dev.earlspilner.books.feign.advice;
 
 import feign.Response;
 import feign.codec.ErrorDecoder;
