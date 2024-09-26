@@ -16,6 +16,21 @@ This project implements a microservices architecture for managing a library syst
 ![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
 ![MapStruct](https://img.shields.io/badge/MapStruct-006400?style=for-the-badge&logo=mapstruct&logoColor=white)
 
+## Launch Order
+
+| No. | Service Name            | Environment Variables                       | Database               |
+|-----|-------------------------|---------------------------------------------|------------------------|
+| 1   | Discovery Server        |                                             |                        |
+| 2   | Authentication Server    | jwt.secret.key, jwt.expiration.access, jwt.expiration.refresh | library_auth_db        |
+| 3   | User Service            | jwt.secret.key                              | library_users_db       |
+| 4   | Books Service           | jwt.secret.key                              | library_books_db       |
+| 5   | Loan Service            | jwt.secret.key                              | library_loans_db       |
+| 6   | Library Service         | jwt.secret.key                              | library_db             |
+| 7   | API Gateway             | jwt.secret.key                              |                        |
+
+> **Note**
+>
+> Make sure to pass the environment variables in the "Modify Run Configuration" menu under the "Environment Variables" section.
 
 ## Services
 
