@@ -1,6 +1,6 @@
 # Library API Microservices
 
-[![Java Build Status](https://github.com/earlspilner/library-api/actions/workflows/maven-build.yml/badge.svg)](https://github.com/earlspilner/the-github-times/actions/workflows/maven-build.yml)
+[![Java Build Status](https://github.com/earlspilner/library-api/actions/workflows/maven-build.yml/badge.svg)](https://github.com/earlspilner/library-api/actions/workflows/maven-build.yml)
 
 > **Note**
 > 
