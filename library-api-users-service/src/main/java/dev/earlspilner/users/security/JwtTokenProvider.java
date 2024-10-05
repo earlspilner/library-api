@@ -1,6 +1,6 @@
 package dev.earlspilner.users.security;
 
-import dev.earlspilner.users.rest.advice.custom.CustomJwtException;
+import dev.earlspilner.users.rest.old.custom.CustomJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

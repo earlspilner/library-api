@@ -1,4 +1,4 @@
-package dev.earlspilner.users.service;
+package dev.earlspilner.users.configuration;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
@@ -6,7 +6,7 @@ import java.security.SecureRandom;
 /**
  * @author Alexander Dudkin
  */
-public class KeyGen {
+public class KeyGeneration {
 
     private static final SecureRandom secureRandom = new SecureRandom();
     private static final int BIT_LENGTH = 256;

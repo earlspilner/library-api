@@ -1,8 +1,8 @@
-package dev.earlspilner.users.rest.advice;
+package dev.earlspilner.users.rest.old;
 
-import dev.earlspilner.users.rest.advice.custom.UnauthorizedOperationException;
-import dev.earlspilner.users.rest.advice.custom.UserExistsException;
-import dev.earlspilner.users.rest.advice.custom.UserNotFoundException;
+import dev.earlspilner.users.rest.old.custom.UnauthorizedOperationException;
+import dev.earlspilner.users.rest.old.custom.UserExistsException;
+import dev.earlspilner.users.rest.old.custom.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +20,7 @@ import static org.springframework.http.HttpStatus.*;
 /**
  * @author Alexander Dudkin
  */
+@Deprecated(forRemoval = true)
 @RestControllerAdvice
 public class GlobalRestExceptionHandler {
 

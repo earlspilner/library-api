@@ -1,6 +1,6 @@
 package dev.earlspilner.users.security;
 
-import dev.earlspilner.users.rest.advice.custom.CustomJwtException;
+import dev.earlspilner.users.rest.old.custom.CustomJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

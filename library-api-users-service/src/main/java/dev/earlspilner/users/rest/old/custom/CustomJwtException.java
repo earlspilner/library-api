@@ -1,10 +1,11 @@
-package dev.earlspilner.users.rest.advice.custom;
+package dev.earlspilner.users.rest.old.custom;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 import java.io.Serial;
 
+@Deprecated
 public class CustomJwtException extends RuntimeException {
 
     @Serial
