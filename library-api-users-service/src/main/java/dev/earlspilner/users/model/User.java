@@ -7,6 +7,7 @@ import lombok.Setter;
 import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static dev.earlspilner.users.model.UserRole.ROLE_VISITOR;
 
@@ -77,6 +78,26 @@ public class User {
         this.createdUtc = createdUtc;
         this.updatedUtc = updatedUtc;
         this.roles = roles;
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User user)) return false;
+
+        return name.equals(user.name) && username.equals(user.username) && email.equals(user.email) && password.equals(user.password) && createdUtc.equals(user.createdUtc) && Objects.equals(updatedUtc, user.updatedUtc) && roles.equals(user.roles);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + username.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + createdUtc.hashCode();
+        result = 31 * result + Objects.hashCode(updatedUtc);
+        result = 31 * result + roles.hashCode();
+        return result;
     }
 
     @Override
