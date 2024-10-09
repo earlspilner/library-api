@@ -1,6 +1,7 @@
 package dev.earlspilner.users.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,18 +25,22 @@ public class User {
     private Integer id;
 
     @Setter
+    @NotEmpty
     @Column(name = "full_name", nullable = false)
     private String name;
 
     @Setter
+    @NotEmpty
     @Column(name = "username", unique = true, nullable = false)
     private String username;
 
     @Setter
+    @NotEmpty
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
     @Setter
+    @NotEmpty
     @Column(name = "password", nullable = false)
     private String password;
 
