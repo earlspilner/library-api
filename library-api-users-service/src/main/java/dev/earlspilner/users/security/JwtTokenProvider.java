@@ -7,7 +7,7 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,6 +23,7 @@ import java.util.Base64;
  * @author Alexander Dudkin
  */
 @Service
+@RequiredArgsConstructor
 public class JwtTokenProvider {
 
     @Getter
@@ -31,8 +32,7 @@ public class JwtTokenProvider {
 
     private Key key;
 
-    @Autowired
-    private CustomUserDetails myUserDetails;
+    private final CustomUserDetails myUserDetails;
 
     @PostConstruct
     protected void init() {
