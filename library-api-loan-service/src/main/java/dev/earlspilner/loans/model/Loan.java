@@ -1,6 +1,8 @@
 package dev.earlspilner.loans.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -20,18 +22,22 @@ public class Loan {
     private Integer id;
 
     @Setter
+    @NotNull
     @Column(name = "user_id", nullable = false, updatable = false)
     private Integer userId;
 
     @Setter
+    @NotNull
     @Column(name = "book_id", nullable = false, updatable = false)
     private Integer bookId;
 
     @Setter
+    @NotNull
     @Column(name = "issued_at", nullable = false)
     private Instant issuedAt;
 
     @Setter
+    @NotNull
     @Column(name = "due_to", nullable = false)
     private Instant dueTo;
 
