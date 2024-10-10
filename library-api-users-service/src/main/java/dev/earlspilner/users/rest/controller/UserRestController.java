@@ -34,14 +34,14 @@ public class UserRestController implements UsersApi {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> addUser(@Valid @RequestBody UserDto userDto) {
         Result<UserDto> result = this.userService.saveUser(userDto);
-        return responseHandler.handleResult(result);
+        return responseHandler.handle201Result(result);
     }
 
     @Override
     @GetMapping("/{username}")
     public ResponseEntity<?> getUser(@PathVariable String username) {
         Result<UserDto> result = this.userService.getUser(username);
-        return responseHandler.handleResult(result, HttpStatus.NOT_FOUND);
+        return responseHandler.handle200Result(result, HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class UserRestController implements UsersApi {
     public ResponseEntity<?> updateUser(@PathVariable String username,
                                         @Valid @RequestBody UserDto userDto) {
         Result<UserDto> result = userService.updateUser(username, userDto);
-        return responseHandler.handleResult(result, HttpStatus.NOT_FOUND);
+        return responseHandler.handle200Result(result, HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class UserRestController implements UsersApi {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteUser(@PathVariable Integer id) {
         Result<Void> result = userService.deleteUser(id);
-        return responseHandler.handleResult(result, HttpStatus.NOT_FOUND);
+        return responseHandler.handle200Result(result, HttpStatus.NOT_FOUND);
     }
 
 }

@@ -13,7 +13,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class ResponseHandler {
 
-    public <T> ResponseEntity<?> handleResult(Result<T> result) {
+    public <T> ResponseEntity<?> handle201Result(Result<T> result) {
+        if (result instanceof Success<T> success) {
+            return new ResponseEntity<>(success.value(), HttpStatus.CREATED);
+        } else if (result instanceof Failure<?> failure) {
+            return new ResponseEntity<>(failure.toProblemDetail(), HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    public <T> ResponseEntity<?> handle200Result(Result<T> result) {
         if (result instanceof Success<T> success) {
             return new ResponseEntity<>(success.value(), HttpStatus.OK);
         } else if (result instanceof Failure<?> failure) {
@@ -23,7 +33,7 @@ public class ResponseHandler {
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    public <T> ResponseEntity<?> handleResult(Result<T> result, HttpStatus httpStatus) {
+    public <T> ResponseEntity<?> handle200Result(Result<T> result, HttpStatus httpStatus) {
         if (result instanceof Success<T> success) {
             return new ResponseEntity<>(success.value(), HttpStatus.OK);
         } else if (result instanceof Failure<?> failure) {
